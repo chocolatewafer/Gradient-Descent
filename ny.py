@@ -6,19 +6,19 @@ x=np.array([1,2,3,4]) #This is the input features
 y= np.array([1,2,3,4]) #This is the training set or output variable
 m=x.shape[0] #Stores the length of x in m
 
-f=np.zeros(m) #creates a numpy array and initializes it with zeroes
-for i in range (m):
-    f[i]=w*x[i]+b #linear regression model, f is the model's prediction
-sum=0
+def compute_cost(x,y,w,b): #funciton to compute cost
+    sum=0
+    m=x.shape[0]
+    for i in range(m):
+        f=w*x[i]+b #calculate predicted value f 
+        sum=sum + ( f-y[i])**2 
+    j=(1/(2*m))*sum #j is the cost
+    print("cost:", j)
+    return j
 
-
-for i in range(m):
-    sum=sum + ( f[i]-y[i])**2 
-j=(1/(2*m))*sum #j is the cost
-print(j)
+w, b=1, 1
+compute_cost(x,y,w,b)
 
 plt.plot(x,y,marker="x", label="try") #plot of x vs y
-plt.plot(x,f,marker="o", c= "r") #plot of the linear regression model
 plt.legend()
 plt.show() 
-
