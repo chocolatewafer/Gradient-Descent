@@ -1,2 +1,1 @@
-# Gradient-Descent
-Implementation of a simple linear gradient descent algorithm.
+--8<-- "docs/index.md"
