@@ -1,8 +1,11 @@
-# Gradient Descent
+# About
 
 I am learning how to write 12 Factor apps.
 This is the implementation of a simple linear gradient descent algorithm using Python and FastAPI.
 
+## Details
+
+I learnt about gradient descent from Andrew ng's course for Supervised and Unsupervised Learning. This project includes APIs that allow you to see gradient descent at work for yourself.
 
 ## Project layout
 

@@ -1,4 +1,62 @@
-site_name: My Docs
-theme: material
-markdown_extensions:
-  - pymdownx.snippets
+#dependencies and install: pip install mkdocs-material "mkdocs-material[imaging]"
+
+site_name: Gradient Descent
+repo_url: https://github.com/chocolatewafer/Gradient-Descent
+
+theme:
+  name: material
+
+  language: en
+
+  logo: assets/logo.png
+  favicon: assets/fav.png
+
+  icon:
+    previous: fontawesome/solid/angle-left
+    next: fontawesome/solid/angle-right
+
+  palette:
+
+    # Palette toggle for light mode
+    - scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+  features:
+      - content.code.copy
+      - content.code.select
+      - navigation.expand
+      - navigation.footer
+      - navigation.instant
+      - navigation.instant.progress
+      - navigation.path
+      - navigation.sections
+      - navigation.tabs
+      - navigation.tabs.sticky
+      - navigation.top
+      - search.suggest
+      - search.share
+      - search.highlight
+      - toc.integrate
+      - toc.follow
+
+plugins:
+  - search
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/chocolatewafer
+      name: chocolatewafer on github
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/sparsh-nidhi-74381915a
+    - icon: fontawesome/brands/discord
+      link: https://fosstodon.org/@squidfunk
+  generator: false
