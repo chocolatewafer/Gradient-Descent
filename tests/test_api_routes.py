@@ -13,10 +13,35 @@ def client():
     return testapp
 
 
-def test_set_features_for_gradient_descent(client):
-    response = client.post(f"{prefix}/gradient", json={"x": "1,2,3,4", "y": "1,2,3,4"})
+def test_api_info_message(client):
+    response = client.get(f"{prefix}/")
     assert response.status_code == 200
-    assert response.json() == "set features and targets"
+    assert (
+        response.json()
+        == "This is API for gradient descent. You can compute cost, gradient and perform gradient descent."
+    )
+
+
+def test_set_features_for_gradient_descent(client):
+    response = client.post(
+        f"{prefix}/gradient", json={"x": [1, 2, 3, 4], "y": [1, 2, 3, 4]}
+    )
+    assert response.status_code == 200
+    assert response.json() == {
+        "msg": "success",
+        "features": [1, 2, 3, 4],
+        "targets": [1, 2, 3, 4],
+    }
+
+
+def test_set_features_with_diff_length_gradient_descent(client):
+    response = client.post(
+        f"{prefix}/gradient", json={"x": [1, 2, 3], "y": [1, 2, 3, 4]}
+    )
+    assert response.status_code == 200
+    assert response.json() == {
+        "msg": "failure: x and y features need to be of same length"
+    }
 
 
 def test_get_features_for_gradient_descent(client):
