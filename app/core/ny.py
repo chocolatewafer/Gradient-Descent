@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
+import io
 
 x = np.array([1, 2, 3, 4])  # This is the input features
 y = np.array([1, 2, 3, 4])  # This is the training set or output variable
@@ -59,7 +59,9 @@ w, b, h, p = gradient_descent(
 )
 print(f"w&b: {w,b}")
 
-if __name__ == "__main__":
+
+def plot():
+    buf = io.BytesIO()
     plt.subplot(2, 1, 1)
     plt.plot([x[0] for x in p], label="w")
     plt.plot([x[1] for x in p], label="b")
@@ -67,4 +69,7 @@ if __name__ == "__main__":
     plt.subplot(2, 1, 2)
     plt.plot(h, label="cost")
     plt.legend()
-    plt.show()
+    plt.savefig(buf, format=format)
+    plt.close()
+    buf.seek(0)
+    return buf.read()

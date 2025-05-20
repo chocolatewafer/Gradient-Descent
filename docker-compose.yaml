@@ -1,0 +1,4 @@
+services:
+  app:
+    image: chocolatewafer/gradient-descent:latest
+    command: sh -c "pip install --no-cache-dir -r requirements.txt"

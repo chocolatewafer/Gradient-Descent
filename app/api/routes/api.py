@@ -1,8 +1,9 @@
 from fastapi import APIRouter
 from fastapi.responses import FileResponse
 from app.core import ny
+from app.core.config import API_VERSION
 
-router = APIRouter(prefix="/v1", tags=["gradient-descent"])
+router = APIRouter(prefix=f"/{API_VERSION}", tags=["gradient-descent"])
 
 
 @router.post("/gradient")

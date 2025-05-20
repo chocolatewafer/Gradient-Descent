@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from app.core.config import APP_NAME, API_PREFIX, VERSION
-from app.api.routes.router import router
+from app.api.routes.api import router
 
 
 def start_application() -> FastAPI:
