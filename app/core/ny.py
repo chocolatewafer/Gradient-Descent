@@ -59,12 +59,12 @@ w, b, h, p = gradient_descent(
 )
 print(f"w&b: {w,b}")
 
-
-plt.subplot(2, 1, 1)
-plt.plot([x[0] for x in p], label="w")
-plt.plot([x[1] for x in p], label="b")
-plt.legend()
-plt.subplot(2, 1, 2)
-plt.plot(h, label="cost")
-plt.legend()
-plt.show()
+if __name__ == "__main__":
+    plt.subplot(2, 1, 1)
+    plt.plot([x[0] for x in p], label="w")
+    plt.plot([x[1] for x in p], label="b")
+    plt.legend()
+    plt.subplot(2, 1, 2)
+    plt.plot(h, label="cost")
+    plt.legend()
+    plt.show()
