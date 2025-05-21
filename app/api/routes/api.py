@@ -19,6 +19,10 @@ class Gradient_descent_data:
         self.x = f
         self.y = t
 
+    @classmethod
+    def get_features(self):
+        return self.x, self.y
+
 
 class Features(BaseModel):
     x: list = Field(default=[1, 2, 3, 4], examples=["[1,2,3,4]"])
@@ -32,6 +36,9 @@ class Settings(BaseModel):
     lr: float = Field(default=10e-4)
 
 
+data = Gradient_descent_data()
+
+
 @router.get("/")
 def return_info():
     return "This is API for gradient descent. You can compute cost, gradient and perform gradient descent."
@@ -39,7 +46,6 @@ def return_info():
 
 @router.post("/gradient/features")
 def set_features(input_data: Features):
-    data = Gradient_descent_data()
     x = input_data.x
     y = input_data.y
     if len(x) != len(y):
@@ -50,7 +56,8 @@ def set_features(input_data: Features):
 
 @router.get("/gradient/features")
 def get_features():
-    pass
+    x, y = data.get_features()
+    return {"x": x, "y": y}
 
 
 @router.post("/settings")
