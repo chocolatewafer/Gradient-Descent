@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from fastapi.responses import FileResponse
 from app.core import ny
 from app.core.config import API_VERSION
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 router = APIRouter(prefix=f"/{API_VERSION}", tags=["gradient-descent"])
 
@@ -21,8 +21,15 @@ class Gradient_descent_data:
 
 
 class Features(BaseModel):
-    x: list
-    y: list
+    x: list = Field(default=[1, 2, 3, 4], examples=["[1,2,3,4]"])
+    y: list = Field(default=[1, 2, 3, 4], examples=["[1,2,3,4]"])
+
+
+class Settings(BaseModel):
+    w_in: float
+    b_in: float
+    iterations: int = Field(default=10000)
+    lr: float = Field(default=10e-4)
 
 
 @router.get("/")
@@ -30,7 +37,7 @@ def return_info():
     return "This is API for gradient descent. You can compute cost, gradient and perform gradient descent."
 
 
-@router.post("/gradient")
+@router.post("/gradient/features")
 def set_features(input_data: Features):
     data = Gradient_descent_data()
     x = input_data.x
@@ -39,6 +46,11 @@ def set_features(input_data: Features):
         return {"msg": "failure: x and y features need to be of same length"}
     data.set_data(x, y)
     return {"msg": "success", "features": data.x, "targets": data.y}
+
+
+@router.get("/gradient/features")
+def get_features():
+    pass
 
 
 @router.post("/settings")

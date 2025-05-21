@@ -24,7 +24,7 @@ def test_api_info_message(client):
 
 def test_set_features_for_gradient_descent(client):
     response = client.post(
-        f"{prefix}/gradient", json={"x": [1, 2, 3, 4], "y": [1, 2, 3, 4]}
+        f"{prefix}/gradient/features", json={"x": [1, 2, 3, 4], "y": [1, 2, 3, 4]}
     )
     assert response.status_code == 200
     assert response.json() == {
@@ -36,7 +36,7 @@ def test_set_features_for_gradient_descent(client):
 
 def test_set_features_with_diff_length_gradient_descent(client):
     response = client.post(
-        f"{prefix}/gradient", json={"x": [1, 2, 3], "y": [1, 2, 3, 4]}
+        f"{prefix}/gradient/features", json={"x": [1, 2, 3], "y": [1, 2, 3, 4]}
     )
     assert response.status_code == 200
     assert response.json() == {
@@ -45,9 +45,9 @@ def test_set_features_with_diff_length_gradient_descent(client):
 
 
 def test_get_features_for_gradient_descent(client):
-    response = client.get(f"{prefix}/gradient")
+    response = client.get(f"{prefix}/gradient/features")
     assert response.status_code == 200
-    assert response.json() == "set features and targets"
+    assert response.json() == {"x": [1, 2, 3, 4], "y": [1, 2, 3, 4]}
 
 
 def test_get_cost_gives_correct_cost(client):
