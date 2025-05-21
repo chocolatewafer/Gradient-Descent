@@ -59,7 +59,7 @@ def test_get_cost_gives_correct_cost(client):
 def test_get_gradient_gives_correct_gradient(client):
     response = client.get(f"{prefix}/gradient")
     assert response.status_code == 200
-    assert response.json() == "set features and targets"
+    assert response.json() == {"dj_dw": -4.0, "dj_db": -2.5}
 
 
 def test_get_plot_of_gradient_descent(client):

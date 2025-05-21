@@ -65,6 +65,7 @@ w, b, h, p = gradient_descent(
     x, y, w_in, b_in, lr, iterations, compute_cost, compute_gradient
 )
 print(f"w&b: {w,b}")
+print(compute_gradient(x, y, 0, 0))
 
 
 def plot():
