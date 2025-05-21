@@ -27,6 +27,11 @@ class Gradient_descent_data:
     def get_settings(self):
         return self.w_in, self.b_in, self.iterations, self.lr
 
+    @classmethod
+    def get_compute_data(self):
+        x, y = ny.numpy_array(self.x, self.y)
+        return x, y, self.w_in, self.b_in, self.iterations, self.lr
+
 
 class Features(BaseModel):
     x: list = Field(default=[1, 2, 3, 4], examples=["[1,2,3,4]"])
@@ -71,16 +76,16 @@ def set_settings():
 
 @router.get("/cost")
 def compute_cost():
-    x, y = data.get_features()
-    w, b, *_ = data.get_settings()
-    x, y = ny.numpy_array(x, y)
+    x, y, w, b, *_ = data.get_compute_data()
     cost = float(ny.compute_cost(x, y, w, b))
     return {"weight": w, "bias": b, "cost": cost}
 
 
 @router.get("/gradient")
 def compute_gradient():
-    pass
+    x, y, w, b, *_ = data.get_compute_data()
+    dw, db = ny.compute_gradient(x, y, w, b)
+    return {"dj_dw": dw, "dj_db": db}
 
 
 @router.get("/gradient/descent")
