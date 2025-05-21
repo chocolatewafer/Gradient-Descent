@@ -7,6 +7,13 @@ y = np.array([1, 2, 3, 4])  # This is the training set or output variable
 m = x.shape[0]  # Stores the length of x in m
 
 
+def numpy_array(*args):
+    out = []
+    for _ in args:
+        out.append(np.array(_))
+    return out
+
+
 def compute_cost(x, y, w, b):  # funciton to compute cost
     sum = 0
     m = x.shape[0]

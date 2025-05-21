@@ -51,12 +51,12 @@ def test_get_features_for_gradient_descent(client):
 
 
 def test_get_cost_gives_correct_cost(client):
-    response = client.get(f"{prefix}/gradient")
+    response = client.get(f"{prefix}/cost")
     assert response.status_code == 200
-    assert response.json() == "set features and targets"
+    assert response.json() == {"weight": 0, "bias": 0, "cost": 3.75}
 
 
-def test_get_cost_gives_correct_gradient(client):
+def test_get_gradient_gives_correct_gradient(client):
     response = client.get(f"{prefix}/gradient")
     assert response.status_code == 200
     assert response.json() == "set features and targets"
