@@ -69,6 +69,11 @@ def test_get_plot_of_gradient_descent(client):
 
 
 def test_perform_gradient_descent(client):
-    response = client.get(f"{prefix}/gradient")
+    response = client.get(f"{prefix}/gradient/descent")
     assert response.status_code == 200
-    assert response.json() == "set features and targets"
+    assert response.json() == {
+        "msg": "params and cost after gradient descent",
+        "w": 0.9937,
+        "b": 0.0232,
+        "cost": 5.2709e-05,
+    }
