@@ -68,14 +68,6 @@ def gradient_descent(
     return w, b, cost_hist, param_hist
 
 
-w_in, b_in = 0, 0  # intial values
-iterations = 10000  # number of iterations to perform gradient descent
-lr = 0.001  # learning rate
-w, b, h, p = gradient_descent(
-    x, y, w_in, b_in, lr, iterations, compute_cost, compute_gradient
-)
-
-
 def plot(h, p):
     buf = io.BytesIO()
     plt.subplot(2, 1, 1)
@@ -89,3 +81,16 @@ def plot(h, p):
     plt.close()
     buf.seek(0)
     return buf.read()
+
+
+if __name__ == "__main__":
+    w_in, b_in = 0, 0  # intial values
+    iterations = 10000  # number of iterations to perform gradient descent
+    lr = 0.001  # learning rate
+    w, b, h, p = gradient_descent(
+        x, y, w_in, b_in, lr, iterations, compute_cost, compute_gradient
+    )
+    print(
+        f"gradient initially: {w_in:.4f},{b_in:.4f} has cost {compute_cost(x,y,w_in,b_in):.4e}"
+    )
+    print(f"After gradient descent: {w:.4f},{b:.4f},{h[-1]:.43}")
