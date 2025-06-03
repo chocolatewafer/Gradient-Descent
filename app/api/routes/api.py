@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from fastapi.responses import FileResponse
+from fastapi.responses import Response
 from app.core import ny
 from app.core.config import API_VERSION
 from pydantic import BaseModel, Field
@@ -38,6 +38,10 @@ class Gradient_descent_data:
     def set_hist(self, h, p):
         self.cost_hist = h
         self.param_hist = p
+
+    @classmethod
+    def get_hist(self):
+        return self.cost_hist, self.param_hist
 
 
 class Features(BaseModel):
@@ -109,5 +113,9 @@ def gradient_descent():
 
 
 @router.get("/gradient/plot")
-def get_plot() -> FileResponse:
-    pass
+def get_plot() -> Response or dict:
+    h, p = data.get_hist()
+    if len(h) == 0 or len(p) == 0:
+        return {"msg": "Perform gradient descent first at ../gradient/descent"}
+    image = ny.plot(h, p)
+    return Response(content=image, media_type="image/png")

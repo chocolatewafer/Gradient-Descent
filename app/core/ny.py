@@ -1,6 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import io
+import matplotlib
+
+matplotlib.use("Agg")
 
 x = np.array([1, 2, 3, 4])  # This is the input features
 y = np.array([1, 2, 3, 4])  # This is the training set or output variable

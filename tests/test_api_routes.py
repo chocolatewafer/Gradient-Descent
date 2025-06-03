@@ -63,9 +63,10 @@ def test_get_gradient_gives_correct_gradient(client):
 
 
 def test_get_plot_of_gradient_descent(client):
-    response = client.get(f"{prefix}/gradient")
+    client.get(f"{prefix}/gradient/descent")
+    response = client.get(f"{prefix}/gradient/plot")
     assert response.status_code == 200
-    assert response.json() == "set features and targets"
+    assert response.headers["content-type"] == "image/png"
 
 
 def test_perform_gradient_descent(client):
