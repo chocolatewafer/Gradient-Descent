@@ -93,3 +93,14 @@ def test_set_settings(client):
         "lr": 0.002,
         "iterations": 10000,
     }
+
+
+def test_perform_gradient_descent_with_new_settings(client):
+    response = client.get(f"{prefix}/gradient/descent")
+    assert response.status_code == 200
+    assert response.json() == {
+        "msg": "params and cost after gradient descent",
+        "w": 0.9995,
+        "b": 0.0018,
+        "cost": 3.2640e-07,
+    }
