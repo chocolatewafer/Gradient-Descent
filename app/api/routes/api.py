@@ -25,12 +25,12 @@ class Gradient_descent_data:
 
     @classmethod
     def get_settings(self):
-        return self.w_in, self.b_in, self.iterations, self.lr
+        return self.w_in, self.b_in, self.lr, self.iterations
 
     @classmethod
     def get_compute_data(self):
         x, y = ny.numpy_array(self.x, self.y)
-        return x, y, self.w_in, self.b_in, self.iterations, self.lr
+        return x, y, self.w_in, self.b_in, self.lr, self.iterations
 
 
 class Features(BaseModel):
