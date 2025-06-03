@@ -71,7 +71,6 @@ lr = 0.001  # learning rate
 w, b, h, p = gradient_descent(
     x, y, w_in, b_in, lr, iterations, compute_cost, compute_gradient
 )
-print(f"{w:.4f},{b:.4f},{h[-1]:.4e}")
 
 
 def plot(h, p):
@@ -83,7 +82,7 @@ def plot(h, p):
     plt.subplot(2, 1, 2)
     plt.plot(h, label="cost")
     plt.legend()
-    plt.savefig(buf, format=format)
+    plt.savefig(buf, format="png")
     plt.close()
     buf.seek(0)
     return buf.read()
