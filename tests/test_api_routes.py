@@ -86,7 +86,7 @@ def test_set_settings(client):
         json={"w_in": 2, "b_in": 2, "lr": 0.002, "iterations": 10000},
     )
     assert response.status_code == 200
-    response.json() == {
+    assert response.json() == {
         "msg": "settings updated sucessfully",
         "w_in": 2,
         "b_in": 2,
