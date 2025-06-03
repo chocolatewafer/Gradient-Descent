@@ -13,6 +13,8 @@ class Gradient_descent_data:
     w_in, b_in = 0, 0  # intial values
     iterations = 10000  # number of iterations to perform gradient descent
     lr = 0.001  # learning rate
+    cost_hist = []
+    param_hist = []
 
     @classmethod
     def set_data(self, f, t):
@@ -31,6 +33,11 @@ class Gradient_descent_data:
     def get_compute_data(self):
         x, y = ny.numpy_array(self.x, self.y)
         return x, y, self.w_in, self.b_in, self.lr, self.iterations
+
+    @classmethod
+    def set_hist(self, h, p):
+        self.cost_hist = h
+        self.param_hist = p
 
 
 class Features(BaseModel):
@@ -90,7 +97,15 @@ def compute_gradient():
 
 @router.get("/gradient/descent")
 def gradient_descent():
-    pass
+    x, y, w_in, b_in, alpha, num_iters = data.get_compute_data()
+    w, b, h, p = ny.gradient_descent(x, y, w_in, b_in, alpha, num_iters)
+    data.set_hist(h, p)
+    return {
+        "msg": "params and cost after gradient descent",
+        "w": w,
+        "b": b,
+        "cost": h[-1],
+    }
 
 
 @router.get("/gradient/plot")
