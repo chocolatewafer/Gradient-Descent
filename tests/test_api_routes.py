@@ -78,3 +78,18 @@ def test_perform_gradient_descent(client):
         "b": 0.0232,
         "cost": 5.2709e-05,
     }
+
+
+def test_set_settings(client):
+    response = client.post(
+        f"{prefix}/gradient/settings",
+        json={"w_in": 2, "b_in": 2, "lr": 0.002, "iterations": 10000},
+    )
+    assert response.status_code == 200
+    response.json() == {
+        "msg": "settings updated sucessfully",
+        "w_in": 2,
+        "b_in": 2,
+        "lr": 0.002,
+        "iterations": 10000,
+    }
