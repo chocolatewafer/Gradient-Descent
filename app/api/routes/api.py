@@ -102,9 +102,9 @@ def gradient_descent():
     data.set_hist(h, p)
     return {
         "msg": "params and cost after gradient descent",
-        "w": w,
-        "b": b,
-        "cost": h[-1],
+        "w": round(w, 4),
+        "b": round(b, 4),
+        "cost": float(format(h[-1], ".4e")),
     }
 
 
