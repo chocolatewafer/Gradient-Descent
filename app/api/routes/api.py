@@ -30,6 +30,13 @@ class Gradient_descent_data:
         return self.w_in, self.b_in, self.lr, self.iterations
 
     @classmethod
+    def set_settings(self, w_in=0, b_in=0, alpha=0.001, iters=10000):
+        self.w_in = w_in
+        self.b_in = b_in
+        self.lr = alpha
+        self.iterations = iters
+
+    @classmethod
     def get_compute_data(self):
         x, y = ny.numpy_array(self.x, self.y)
         return x, y, self.w_in, self.b_in, self.lr, self.iterations
@@ -80,9 +87,20 @@ def get_features():
     return {"x": x, "y": y}
 
 
-@router.post("/settings")
-def set_settings():
-    pass
+@router.post("/gradient/settings")
+def set_settings(input_settings: Settings):
+    w = input_settings.w_in
+    b = input_settings.b_in
+    alpha = input_settings.lr
+    iters = input_settings.iterations
+    data.set_settings(w, b, alpha, iters)
+    return {
+        "msg": "settings updated sucessfully",
+        "w_in": data.w_in,
+        "b_in": data.b_in,
+        "lr": data.lr,
+        "iterations": data.iterations,
+    }
 
 
 @router.get("/cost")
