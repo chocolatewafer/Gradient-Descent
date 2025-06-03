@@ -41,7 +41,14 @@ def compute_gradient(x, y, w, b):
 
 
 def gradient_descent(
-    x, y, w_in, b_in, alpha, num_iters, cost_funtion, gradient_funciton
+    x,
+    y,
+    w_in,
+    b_in,
+    alpha,
+    num_iters,
+    cost_funtion=compute_cost,
+    gradient_funciton=compute_gradient,
 ):
     w = w_in
     b = b_in
@@ -64,12 +71,9 @@ lr = 0.001  # learning rate
 w, b, h, p = gradient_descent(
     x, y, w_in, b_in, lr, iterations, compute_cost, compute_gradient
 )
-print(f"w&b: {w,b}")
-print(float(x) for x in h)
-print(float(x) for x in p)
 
 
-def plot():
+def plot(h, p):
     buf = io.BytesIO()
     plt.subplot(2, 1, 1)
     plt.plot([x[0] for x in p], label="w")
